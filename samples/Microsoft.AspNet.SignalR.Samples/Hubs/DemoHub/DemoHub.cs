@@ -1,12 +1,11 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Microsoft.AspNet.SignalR.Hubs;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using Microsoft.AspNet.SignalR.Hubs;
 
 namespace Microsoft.AspNet.SignalR.Samples.Hubs.DemoHub
 {
@@ -28,11 +27,19 @@ namespace Microsoft.AspNet.SignalR.Samples.Hubs.DemoHub
         {
             Clients.User(userId).invoke();
         }
-
+        public void SendToGroup(string groupName, double price)
+        {
+            Clients.Group(groupName).UpdatePrice(groupName, price);
+        }
         public void AddToGroups()
         {
             Groups.Add(Context.ConnectionId, "foo");
             Groups.Add(Context.ConnectionId, "bar");
+            Clients.Caller.groupAdded();
+        }
+        public void AddToGroup(string groupName)
+        {
+            Groups.Add(Context.ConnectionId, groupName);
             Clients.Caller.groupAdded();
         }
 

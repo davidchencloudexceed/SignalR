@@ -8,7 +8,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Client.Hubs;
 
 namespace Microsoft.AspNet.SignalR.Client.Samples
 {
@@ -71,22 +70,16 @@ namespace Microsoft.AspNet.SignalR.Client.Samples
             hubConnection.TraceWriter = _traceWriter;
 
             var hubProxy = hubConnection.CreateHubProxy("demo");
-            hubProxy.On<int>("invoke", (i) =>
-            {
-                int n = hubProxy.GetValue<int>("index");
-                hubConnection.TraceWriter.WriteLine("{0} client state index -> {1}", i, n);
-            });
-
             await hubConnection.Start();
+            await hubProxy.Invoke("AddToGroup", "MSFT");
+            hubProxy.On<string, double>("UpdatePrice", (stockSymbol, stockPrice) =>
+             {
+                 hubConnection.TraceWriter.WriteLine("get stock:{0} price:{1}", stockSymbol, stockPrice);
+             });
+
+
             hubConnection.TraceWriter.WriteLine("transport.Name={0}", hubConnection.Transport.Name);
 
-            hubConnection.TraceWriter.WriteLine("Invoking long running hub method with progress...");
-            var result = await hubProxy.Invoke<string, int>("ReportProgress",
-                percent => hubConnection.TraceWriter.WriteLine("{0}% complete", percent),
-                /* jobName */ "Long running job");
-            hubConnection.TraceWriter.WriteLine("{0}", result);
-
-            await hubProxy.Invoke("multipleCalls");
         }
 
         private async Task RunRawConnection(string serverUrl)
