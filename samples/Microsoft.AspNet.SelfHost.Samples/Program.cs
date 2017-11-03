@@ -18,15 +18,16 @@ namespace Microsoft.AspNet.SelfHost.Samples
 
                 var hubConext = GlobalHost.ConnectionManager.GetHubContext<DemoHub>();
                 var options = new CmdLineOption();
+                var userInput = Console.ReadLine().Split(' ');
                 while (true)
                 {
-                    var userInput = new string[] { Console.ReadLine() };
+
                     if (CommandLine.Parser.Default.ParseArguments(userInput, options))
                     {
                         var stockGroup = hubConext.Clients.Group(options.stockSymbol);
-                        stockGroup.UpdatePrice(options.price);
+                        stockGroup.UpdatePrice(options.stockSymbol, options.price);
                     }
-
+                    userInput = Console.ReadLine().Split(' ');
                 }
             }
         }
