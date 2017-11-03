@@ -2,9 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Client.Hubs;
 
 namespace Microsoft.AspNet.SignalR.Client.Samples
 {
@@ -14,9 +11,29 @@ namespace Microsoft.AspNet.SignalR.Client.Samples
         {
             var writer = Console.Out;
             var client = new CommonClient(writer);
-            client.RunAsync("http://localhost:8080/").Wait();
+            
+            var options = new CmdLineOption();
+            var userInput = Console.ReadLine().Split(' ');
+            while (true)
+            {
 
-            Console.ReadKey();
+                if (CommandLine.Parser.Default.ParseArguments(userInput, options))
+                {
+                    switch (options.action)
+                    {
+                        case "connect":
+                            client.Connect("http://localhost:8080/").Wait();
+                            break;
+                        case "addGroup":
+                            client.AddGroup().Wait();
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
+                userInput = Console.ReadLine().Split(' ');
+            }
         }
     }
 }

@@ -14,6 +14,8 @@ namespace Microsoft.AspNet.SignalR.Client.Samples
     public class CommonClient
     {
         private TextWriter _traceWriter;
+        private HubConnection hubConnection;
+        private IHubProxy hubProxy;
 
         public CommonClient(TextWriter traceWriter)
         {
@@ -62,6 +64,28 @@ namespace Microsoft.AspNet.SignalR.Client.Samples
             await hubProxy.Invoke("DisplayMessageGroup", "CommonClientGroup", "Hello Group Members! (caller should not see this message)");
 
             await hubProxy.Invoke("DisplayMessageCaller", "Hello Caller again!");
+        }
+
+        public async Task Connect(string url)
+        {
+            hubConnection = new HubConnection(url);
+            hubConnection.TraceWriter = _traceWriter;
+            hubProxy = hubConnection.CreateHubProxy("demo");
+            await hubConnection.Start();
+            hubConnection.TraceWriter.WriteLine("transport.Name={0}", hubConnection.Transport.Name);
+
+        }
+        public async Task AddGroup()
+        {
+
+            await hubProxy.Invoke("AddToGroup", "MSFT");
+            hubProxy.On<string, double>("UpdatePrice", (stockSymbol, stockPrice) =>
+            {
+                hubConnection.TraceWriter.WriteLine("get stock:{0} price:{1}", stockSymbol, stockPrice);
+            });
+
+
+            hubConnection.TraceWriter.WriteLine("transport.Name={0}", hubConnection.Transport.Name);
         }
 
         private async Task RunDemo(string url)

@@ -69,6 +69,7 @@ namespace Microsoft.AspNet.SignalR.Owin
             if (!environment.TryGetValue(typeof(WebSocketContext).FullName, out value))
             {
                 webSocket = new OwinWebSocket(environment);
+                webSocket.
             }
             else
             {

@@ -56,6 +56,7 @@
     <Compile Include="..\Common\CommonClient.cs">
       <Link>CommonClient.cs</Link>
     </Compile>
+    <Compile Include="CmdLineOption.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
