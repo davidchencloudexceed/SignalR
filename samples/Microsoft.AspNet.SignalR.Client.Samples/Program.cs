@@ -11,7 +11,7 @@ namespace Microsoft.AspNet.SignalR.Client.Samples
         {
             var writer = Console.Out;
             var client = new CommonClient(writer);
-            
+
             var options = new CmdLineOption();
             var userInput = Console.ReadLine().Split(' ');
             while (true)
@@ -19,18 +19,29 @@ namespace Microsoft.AspNet.SignalR.Client.Samples
 
                 if (CommandLine.Parser.Default.ParseArguments(userInput, options))
                 {
-                    switch (options.action)
+                    try
                     {
-                        case "connect":
-                            client.Connect("http://localhost:8080/").Wait();
-                            break;
-                        case "addGroup":
-                            client.AddGroup().Wait();
-                            break;
-                        default:
-                            break;
+                        switch (options.action)
+                        {
+                            case "connect":
+                                client.Connect("http://localhost:8080/").Wait();
+                                break;
+                            case "addGroup":
+                                client.AddGroup().Wait();
+                                break;
+                            default:
+                                break;
 
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("wrong cmd line, please input again");
                 }
                 userInput = Console.ReadLine().Split(' ');
             }

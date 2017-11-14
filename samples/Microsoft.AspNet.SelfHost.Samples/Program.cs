@@ -19,6 +19,9 @@ namespace Microsoft.AspNet.SelfHost.Samples
                 var hubConext = GlobalHost.ConnectionManager.GetHubContext<DemoHub>();
                 var options = new CmdLineOption();
                 var userInput = Console.ReadLine().Split(' ');
+                
+                var demoHub = GlobalHost.ConnectionManager.GetHubContext<DemoHub>();
+                //demoHub.Clients.Group("a").UpdatePrice(100);
                 while (true)
                 {
 

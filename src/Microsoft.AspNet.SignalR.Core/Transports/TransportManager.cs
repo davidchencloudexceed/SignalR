@@ -1,10 +1,10 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Microsoft.AspNet.SignalR.Hosting;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNet.SignalR.Hosting;
 
 namespace Microsoft.AspNet.SignalR.Transports
 {
@@ -27,9 +27,9 @@ namespace Microsoft.AspNet.SignalR.Transports
                 throw new ArgumentNullException("resolver");
             }
 
-            Register("foreverFrame", context => new ForeverFrameTransport(context, resolver));
-            Register("serverSentEvents", context => new ServerSentEventsTransport(context, resolver));
-            Register("longPolling", context => new LongPollingTransport(context, resolver));
+            //Register("foreverFrame", context => new ForeverFrameTransport(context, resolver));
+            //Register("serverSentEvents", context => new ServerSentEventsTransport(context, resolver));
+            //Register("longPolling", context => new LongPollingTransport(context, resolver));
             Register("webSockets", context => new WebSocketTransport(context, resolver));
         }
 
