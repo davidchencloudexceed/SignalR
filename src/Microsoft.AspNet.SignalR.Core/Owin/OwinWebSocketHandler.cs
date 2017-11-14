@@ -1,14 +1,14 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Microsoft.AspNet.SignalR.Hosting;
+using Microsoft.AspNet.SignalR.WebSockets;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Hosting;
-using Microsoft.AspNet.SignalR.WebSockets;
 
 namespace Microsoft.AspNet.SignalR.Owin
 {
@@ -69,7 +69,7 @@ namespace Microsoft.AspNet.SignalR.Owin
             if (!environment.TryGetValue(typeof(WebSocketContext).FullName, out value))
             {
                 webSocket = new OwinWebSocket(environment);
-                webSocket.
+
             }
             else
             {
