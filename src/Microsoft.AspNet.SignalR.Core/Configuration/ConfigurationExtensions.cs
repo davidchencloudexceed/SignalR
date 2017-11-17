@@ -7,9 +7,9 @@ namespace Microsoft.AspNet.SignalR.Configuration
 {
     internal static class ConfigurationExtensions
     {
-        public const int MissedTimeoutsBeforeClientReconnect = 2;
-        public const int HeartBeatsPerKeepAlive = 2;
-        public const int HeartBeatsPerDisconnectTimeout = 6;
+        public const int MissedTimeoutsBeforeClientReconnect = 20;
+        public const int HeartBeatsPerKeepAlive = 20;
+        public const int HeartBeatsPerDisconnectTimeout = 60;
 
         /// <summary>
         /// The amount of time the client should wait without seeing a keep alive before trying to reconnect.

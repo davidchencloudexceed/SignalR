@@ -1,13 +1,15 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Microsoft.AspNet.SignalR.Infrastructure;
+using Microsoft.AspNet.SignalR.Transports;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Infrastructure;
+using static Microsoft.AspNet.SignalR.Infrastructure.Connection;
 
 namespace Microsoft.AspNet.SignalR.Messaging
 {
@@ -19,7 +21,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
 
         private int _state;
         private int _subscriptionState;
-
+        private ITransport _transport;
         private bool Alive
         {
             get
@@ -69,6 +71,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
             MaxMessages = maxMessages;
             _counters = counters;
             _callbackState = state;
+            _transport = state!=null?((ReceiveContext)state).GetTransport():null;
 
             _counters.MessageBusSubscribersTotal.Increment();
             _counters.MessageBusSubscribersCurrent.Increment();

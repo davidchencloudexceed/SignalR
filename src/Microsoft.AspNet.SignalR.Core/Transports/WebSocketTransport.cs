@@ -1,12 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Configuration;
 using Microsoft.AspNet.SignalR.Hosting;
 using Microsoft.AspNet.SignalR.Infrastructure;
@@ -14,6 +8,12 @@ using Microsoft.AspNet.SignalR.Json;
 using Microsoft.AspNet.SignalR.Owin;
 using Microsoft.AspNet.SignalR.Tracing;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Microsoft.AspNet.SignalR.Transports
 {
@@ -143,7 +143,8 @@ namespace Microsoft.AspNet.SignalR.Transports
                 return _context.Response.End(Resources.Error_NotWebSocketRequest);
             }
 
-            Action<IWebSocket> prepareWebSocket = socket => {
+            Action<IWebSocket> prepareWebSocket = socket =>
+            {
                 _socket = socket;
                 socket.OnClose = _closed;
                 socket.OnMessage = _message;
@@ -164,6 +165,7 @@ namespace Microsoft.AspNet.SignalR.Transports
             {
                 try
                 {
+                    //context.state is persistent response that contains the message
                     context.Transport.JsonSerializer.Serialize(context.State, writer);
                     writer.Flush();
 

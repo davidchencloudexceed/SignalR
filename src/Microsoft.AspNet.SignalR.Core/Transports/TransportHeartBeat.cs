@@ -1,6 +1,9 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Microsoft.AspNet.SignalR.Configuration;
+using Microsoft.AspNet.SignalR.Infrastructure;
+using Microsoft.AspNet.SignalR.Tracing;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,9 +11,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
-using Microsoft.AspNet.SignalR.Configuration;
-using Microsoft.AspNet.SignalR.Infrastructure;
-using Microsoft.AspNet.SignalR.Tracing;
 
 namespace Microsoft.AspNet.SignalR.Transports
 {
@@ -214,6 +214,7 @@ namespace Microsoft.AspNet.SignalR.Transports
 
         private void CheckTimeoutAndKeepAlive(ConnectionMetadata metadata)
         {
+
             if (RaiseTimeout(metadata))
             {
                 // If we're past the expiration time then just timeout the connection
@@ -272,6 +273,7 @@ namespace Microsoft.AspNet.SignalR.Transports
 
         private bool RaiseKeepAlive(ConnectionMetadata metadata)
         {
+
             var keepAlive = _configurationManager.KeepAlive;
 
             // Don't raise keep alive if it's set to 0 or the transport doesn't support

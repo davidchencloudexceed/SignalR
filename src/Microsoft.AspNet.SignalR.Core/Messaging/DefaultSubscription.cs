@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Microsoft.AspNet.SignalR.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -8,7 +9,6 @@ using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace Microsoft.AspNet.SignalR.Messaging
 {
@@ -19,7 +19,6 @@ namespace Microsoft.AspNet.SignalR.Messaging
         private List<Cursor> _cursors;
         private List<Topic> _cursorTopics;
         private ulong[] _cursorsState;
-
         private readonly IStringMinifier _stringMinifier;
 
         public DefaultSubscription(string identity,

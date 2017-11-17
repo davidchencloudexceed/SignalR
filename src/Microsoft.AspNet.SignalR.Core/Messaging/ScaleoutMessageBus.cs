@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Configuration;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.AspNet.SignalR.Tracing;
+using Microsoft.AspNet.SignalR.Transports;
 
 namespace Microsoft.AspNet.SignalR.Messaging
 {

@@ -1,14 +1,13 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Hosting;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.AspNet.SignalR.Json;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Threading.Tasks;
 
 namespace Microsoft.AspNet.SignalR.Transports
 {
@@ -56,6 +55,7 @@ namespace Microsoft.AspNet.SignalR.Transports
         public override Task KeepAlive()
         {
             // Ensure delegate continues to use the C# Compiler static delegate caching optimization.
+
             return EnqueueOperation(state => PerformKeepAlive(state), this);
         }
 

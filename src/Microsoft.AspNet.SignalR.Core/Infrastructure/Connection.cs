@@ -1,21 +1,18 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Json;
 using Microsoft.AspNet.SignalR.Messaging;
 using Microsoft.AspNet.SignalR.Tracing;
 using Microsoft.AspNet.SignalR.Transports;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Microsoft.AspNet.SignalR.Infrastructure
 {
@@ -237,6 +234,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
 
         public IDisposable Receive(string messageId, Func<PersistentResponse, object, Task<bool>> callback, int maxMessages, object state)
         {
+            //state is the transport
             var receiveContext = new ReceiveContext(this, callback, state);
 
             return _bus.Subscribe(this,
@@ -382,7 +380,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
             }
         }
 
-        private class ReceiveContext
+        internal class ReceiveContext
         {
             private readonly Connection _connection;
             private readonly Func<PersistentResponse, object, Task<bool>> _callback;
@@ -400,6 +398,10 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
                 var response = _connection.GetResponse(result);
 
                 return _callback(response, _callbackState);
+            }
+            public ITransport GetTransport()
+            {
+                return _callbackState as ITransport;
             }
         }
     }

@@ -1,14 +1,14 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.AspNet.SignalR.Json;
 using Microsoft.AspNet.SignalR.Messaging;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 
 namespace Microsoft.AspNet.SignalR.Transports
 {
@@ -98,7 +98,7 @@ namespace Microsoft.AspNet.SignalR.Transports
             writer.Write('"');
             writer.Write(':');
             writer.Write('"');
-            _writeCursor(writer);
+            //_writeCursor(writer);
             writer.Write('"');
             writer.Write(',');
 
