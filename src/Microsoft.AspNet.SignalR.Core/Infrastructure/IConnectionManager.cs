@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNet.SignalR.Hubs;
+using Microsoft.AspNet.SignalR.Messaging;
 
 namespace Microsoft.AspNet.SignalR.Infrastructure
 {
@@ -53,5 +54,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
         /// <returns>A <see cref="IPersistentConnectionContext"/> for the <see cref="PersistentConnection"/>.</returns>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The connection type needs to be specified")]
         IPersistentConnectionContext GetConnectionContext<T>() where T : PersistentConnection;
+
+        TopicLookup GetTopicManager();
     }
 }

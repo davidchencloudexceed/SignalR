@@ -55,7 +55,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
         private readonly Action<ISubscriber, string> _addEvent;
         private readonly Action<ISubscriber, string> _removeEvent;
         private readonly Action<object> _disposeSubscription;
-
+        private readonly IDependencyResolver _resolver;
         /// <summary>
         /// 
         /// </summary>
@@ -67,6 +67,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
                    resolver.Resolve<IConfigurationManager>(),
                    DefaultMaxTopicsWithNoSubscriptions)
         {
+            _resolver = resolver;
         }
 
         /// <summary>
@@ -131,7 +132,8 @@ namespace Microsoft.AspNet.SignalR.Messaging
             _removeEvent = RemoveEvent;
             _disposeSubscription = o => DisposeSubscription(o);
 
-            Topics = new TopicLookup();
+            //Topics = new TopicLookup();
+            Topics = _resolver.Resolve<TopicLookup>();
         }
 
         protected internal TopicLookup Topics { get; private set; }

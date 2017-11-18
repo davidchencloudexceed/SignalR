@@ -22,7 +22,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
     {
         private readonly IDependencyResolver _resolver;
         private readonly IPerformanceCounterManager _counters;
-
+        private TopicLookup _topicLookUp;
         /// <summary>
         /// Initializes a new instance of the <see cref="ConnectionManager"/> class.
         /// </summary>
@@ -31,6 +31,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
         {
             _resolver = resolver;
             _counters = _resolver.Resolve<IPerformanceCounterManager>();
+            
         }
 
         /// <summary>
@@ -139,5 +140,11 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
                                   _resolver.Resolve<IProtectedData>(),
                                   _resolver.Resolve<IMemoryPool>());
         }
+        public TopicLookup GetTopicManager()
+        {
+            _topicLookUp = _resolver.Resolve<TopicLookup>();
+            return _topicLookUp;
+        }
+        
     }
 }

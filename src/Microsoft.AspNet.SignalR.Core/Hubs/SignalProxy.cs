@@ -60,5 +60,16 @@ namespace Microsoft.AspNet.SignalR.Hubs
                 Args = args
             };
         }
+        public virtual HubOutgoingInvokerContext GetHubOutgoingInvokerContext(string method, params object[] args)
+        {
+            var invocation = GetInvocationData(method, args);
+
+            return new HubOutgoingInvokerContext(Connection, Signal, invocation)
+            {
+                ExcludedSignals = _exclude
+            };
+
+        }
+
     }
 }

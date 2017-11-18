@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1
@@ -23,12 +24,28 @@ namespace ConsoleApp1
         {
             myFunc(n);
         }
+        private static int i = 0;
         static void Main(string[] args)
         {
-            AwaitAsync(10000);
+            var t = new Thread(DoWork);
+            //t.IsBackground = false;
+            t.Start();
+            
+            
+            Console.WriteLine($"main thread {i++}");
+
+            Console.WriteLine($"main thread after join {i++}");
+            //AwaitAsync(10000);
             //FuncTest(NonAwaitAsync, 10000);
-            Console.WriteLine("start main");
-            Console.ReadLine();
+            //Console.WriteLine("start main");
+            Console.ReadKey();
+        }
+
+        static void DoWork()
+        {
+            Console.WriteLine($"Other thread before sleep {i++}");
+            Thread.Sleep(5000);
+            Console.WriteLine($"Other thread after sleep {i++}");
         }
     }
 }
