@@ -1,9 +1,9 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR.Messaging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNet.SignalR.Infrastructure
 {
@@ -56,5 +56,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
         IPersistentConnectionContext GetConnectionContext<T>() where T : PersistentConnection;
 
         TopicLookup GetTopicManager();
+        IMessageBus GetMessageBus();
+        IMemoryPool GetMemoryPool();
     }
 }

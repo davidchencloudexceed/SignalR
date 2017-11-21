@@ -1,17 +1,16 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Hosting;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.AspNet.SignalR.Json;
 using Microsoft.AspNet.SignalR.Tracing;
 using Newtonsoft.Json;
+using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Microsoft.AspNet.SignalR.Transports
 {
@@ -49,7 +48,7 @@ namespace Microsoft.AspNet.SignalR.Transports
             _counters = performanceCounterManager;
         }
 
-        protected IMemoryPool Pool { get; private set; }
+        public IMemoryPool Pool { get; private set; }
 
         protected virtual int MaxMessages
         {
@@ -59,7 +58,7 @@ namespace Microsoft.AspNet.SignalR.Transports
             }
         }
 
-        protected JsonSerializer JsonSerializer
+        public JsonSerializer JsonSerializer
         {
             get { return _jsonSerializer; }
         }

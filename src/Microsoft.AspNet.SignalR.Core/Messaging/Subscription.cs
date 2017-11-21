@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using Microsoft.AspNet.SignalR.Infrastructure;
+using Microsoft.AspNet.SignalR.Json;
 using Microsoft.AspNet.SignalR.Transports;
 using System;
 using System.Collections.Generic;
@@ -71,7 +72,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
             MaxMessages = maxMessages;
             _counters = counters;
             _callbackState = state;
-            _transport = state!=null?((ReceiveContext)state).GetTransport():null;
+            _transport = state != null ? ((ReceiveContext)state).GetTransport() : null;
 
             _counters.MessageBusSubscribersTotal.Increment();
             _counters.MessageBusSubscribersCurrent.Increment();
@@ -267,6 +268,31 @@ namespace Microsoft.AspNet.SignalR.Messaging
             public const int Idle = 0;
             public const int InvokingCallback = 1;
             public const int Disposed = 2;
+        }
+        public async Task PassThroughTopicStoreSending(PersistentResponse messageResponse)
+        {
+            var webSocTransport = this._transport as WebSocketTransport;
+            using (var writer = new BinaryMemoryPoolTextWriter(webSocTransport.Pool))
+            {
+                try
+                {
+                    //context.state is persistent response that contains the message
+
+                    webSocTransport.JsonSerializer.Serialize(messageResponse, writer);
+                    writer.Flush();
+                    var socket = webSocTransport.GetWebSocket();
+                    await socket.Send(writer.Buffer).PreserveCulture();
+
+
+                }
+                catch (Exception ex)
+                {
+                    // OnError will close the socket in the event of a JSON serialization or flush error.
+                    // The client should then immediately reconnect instead of simply missing keep-alives.
+
+                    throw ex;
+                }
+            }
         }
     }
 }

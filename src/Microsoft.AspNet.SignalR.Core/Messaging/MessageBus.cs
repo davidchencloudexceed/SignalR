@@ -55,7 +55,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
         private readonly Action<ISubscriber, string> _addEvent;
         private readonly Action<ISubscriber, string> _removeEvent;
         private readonly Action<object> _disposeSubscription;
-        private readonly IDependencyResolver _resolver;
+
         /// <summary>
         /// 
         /// </summary>
@@ -65,9 +65,10 @@ namespace Microsoft.AspNet.SignalR.Messaging
                    resolver.Resolve<ITraceManager>(),
                    resolver.Resolve<IPerformanceCounterManager>(),
                    resolver.Resolve<IConfigurationManager>(),
+                   resolver.Resolve<TopicLookup>(),
                    DefaultMaxTopicsWithNoSubscriptions)
         {
-            _resolver = resolver;
+
         }
 
         /// <summary>
@@ -77,12 +78,14 @@ namespace Microsoft.AspNet.SignalR.Messaging
         /// <param name="traceManager"></param>
         /// <param name="performanceCounterManager"></param>
         /// <param name="configurationManager"></param>
+        /// <param name="topicLookup"></param>
         /// <param name="maxTopicsWithNoSubscriptions"></param>
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The message broker is disposed when the bus is disposed.")]
         public MessageBus(IStringMinifier stringMinifier,
                           ITraceManager traceManager,
                           IPerformanceCounterManager performanceCounterManager,
                           IConfigurationManager configurationManager,
+                          TopicLookup topicLookup,
                           int maxTopicsWithNoSubscriptions)
         {
             if (stringMinifier == null)
@@ -133,7 +136,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
             _disposeSubscription = o => DisposeSubscription(o);
 
             //Topics = new TopicLookup();
-            Topics = _resolver.Resolve<TopicLookup>();
+            Topics = topicLookup;
         }
 
         protected internal TopicLookup Topics { get; private set; }
@@ -291,7 +294,6 @@ namespace Microsoft.AspNet.SignalR.Messaging
         {
             // REVIEW: This can be called multiple times, should we guard against it?
             Counters.MessageBusTopicsCurrent.Increment();
-
             return new Topic(_messageStoreSize, _topicTtl);
         }
 

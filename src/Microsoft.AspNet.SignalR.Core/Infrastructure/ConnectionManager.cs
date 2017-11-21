@@ -1,17 +1,12 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Hubs;
-using Microsoft.AspNet.SignalR.Infrastructure;
-using Microsoft.AspNet.SignalR.Json;
 using Microsoft.AspNet.SignalR.Messaging;
 using Microsoft.AspNet.SignalR.Tracing;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace Microsoft.AspNet.SignalR.Infrastructure
 {
@@ -31,7 +26,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
         {
             _resolver = resolver;
             _counters = _resolver.Resolve<IPerformanceCounterManager>();
-            
+
         }
 
         /// <summary>
@@ -145,6 +140,13 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
             _topicLookUp = _resolver.Resolve<TopicLookup>();
             return _topicLookUp;
         }
-        
+        public IMessageBus GetMessageBus()
+        {
+            return _resolver.Resolve<IMessageBus>();
+        }
+        public IMemoryPool GetMemoryPool()
+        {
+            return _resolver.Resolve<IMemoryPool>();
+        }
     }
 }

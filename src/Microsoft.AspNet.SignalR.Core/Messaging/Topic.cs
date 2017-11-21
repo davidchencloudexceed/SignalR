@@ -15,7 +15,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
         private DateTime _lastUsed = DateTime.UtcNow;
 
         public IList<ISubscription> Subscriptions { get; private set; }
-        public MessageStore<Message> Store { get; private set; }
+        public virtual MessageStore<Message> Store { get; private set; }
         public ReaderWriterLockSlim SubscriptionLock { get; private set; }
 
         // State of the topic
@@ -75,7 +75,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
                 MarkUsed();
 
                 Subscriptions.Add(subscription);
-                
+
                 // Created -> HasSubscriptions
                 Interlocked.CompareExchange(ref State,
                                             TopicState.HasSubscriptions,
@@ -99,9 +99,9 @@ namespace Microsoft.AspNet.SignalR.Messaging
                 SubscriptionLock.EnterWriteLock();
 
                 MarkUsed();
-              
+
                 Subscriptions.Remove(subscription);
-               
+
 
                 if (Subscriptions.Count == 0)
                 {

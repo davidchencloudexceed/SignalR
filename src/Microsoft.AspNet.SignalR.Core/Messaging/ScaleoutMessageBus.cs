@@ -194,9 +194,9 @@ namespace Microsoft.AspNet.SignalR.Messaging
                 _trace.TraceVerbose("Message id: {0}, stream : {1}, eventKey: '{2}' saved with local id: {3}",
                     id, streamIndex, message.Key, localId);
 
-                MessageStore<Message> messageStore = Topics[message.Key].Store;
+                //SimpleMessageStore<Message> messageStore = Topics[message.Key].Store;
 
-                localMapping[i] = new LocalEventKeyInfo(message.Key, localId, messageStore);
+                //localMapping[i] = new LocalEventKeyInfo(message.Key, localId, messageStore);
             }
 
             // Get the stream for this payload

@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using Microsoft.AspNet.SignalR.Hosting;
+using Microsoft.AspNet.SignalR.Transports;
 using Microsoft.AspNet.SignalR.WebSockets;
 using System;
 using System.Collections.Generic;
@@ -51,9 +52,10 @@ namespace Microsoft.AspNet.SignalR.Owin
         private readonly Action<IWebSocket> _prepareWebSocket;
 
         private readonly int? _maxIncomingMessageSize;
-
-        public OwinWebSocketHandler(Func<IWebSocket, Task> callback, Action<IWebSocket> prepareWebsocket, int? maxIncomingMessageSize)
+        private ITransportConnection _connection;
+        public OwinWebSocketHandler(ITransportConnection connection, Func<IWebSocket, Task> callback, Action<IWebSocket> prepareWebsocket, int? maxIncomingMessageSize)
         {
+            _connection = connection;
             _callback = callback;
             _prepareWebSocket = prepareWebsocket;
             _maxIncomingMessageSize = maxIncomingMessageSize;
@@ -75,7 +77,7 @@ namespace Microsoft.AspNet.SignalR.Owin
             {
                 webSocket = ((WebSocketContext)value).WebSocket;
             }
-
+            this._connection.SetWebSocket(webSocket);
             var cts = new CancellationTokenSource();
             var webSocketHandler = new DefaultWebSocketHandler(_maxIncomingMessageSize);
             _prepareWebSocket(webSocketHandler);
@@ -110,7 +112,7 @@ namespace Microsoft.AspNet.SignalR.Owin
             });
         }
 
-        private class OwinWebSocket : WebSocket
+        internal class OwinWebSocket : WebSocket
         {
             private readonly WebSocketSendAsync _sendAsync;
             private readonly WebSocketReceiveAsync _receiveAsync;

@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 
 namespace Microsoft.AspNet.SignalR.Infrastructure
@@ -34,6 +35,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
         private readonly Func<Message, bool> _excludeMessage;
         private readonly IMemoryPool _pool;
 
+        private WebSocket webSokcet;
         public Connection(IMessageBus newMessageBus,
                           JsonSerializer jsonSerializer,
                           string baseSignal,
@@ -379,7 +381,14 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
                 response.GroupsToken = protectedData.Protect(groupsString, Purposes.Groups);
             }
         }
-
+        public void SetWebSocket(WebSocket socket)
+        {
+            this.webSokcet = socket;
+        }
+        public WebSocket GetWebSocket()
+        {
+            return this.webSokcet;
+        }
         internal class ReceiveContext
         {
             private readonly Connection _connection;

@@ -2,13 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using System.Text;
-using System.IO;
 using System.Globalization;
+using System.IO;
+using System.Text;
 
 namespace Microsoft.AspNet.SignalR.Infrastructure
 {
-    internal class MemoryPoolTextWriter : TextWriter
+    public class MemoryPoolTextWriter : TextWriter
     {
         private readonly IMemoryPool _memory;
 

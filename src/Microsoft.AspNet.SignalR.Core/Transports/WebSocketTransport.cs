@@ -31,7 +31,6 @@ namespace Microsoft.AspNet.SignalR.Transports
         private readonly Action _closed;
         private readonly Action<Exception> _error;
         private readonly IPerformanceCounterManager _counters;
-
         private static readonly byte[] _keepAlive = Encoding.UTF8.GetBytes("{}");
 
         public WebSocketTransport(HostContext context,
@@ -100,7 +99,7 @@ namespace Microsoft.AspNet.SignalR.Transports
             }
             else
             {
-                return AcceptWebSocketRequest(socket =>
+                return AcceptWebSocketRequest(connection, socket =>
                 {
                     return ProcessRequestCore(connection);
                 });
@@ -132,7 +131,7 @@ namespace Microsoft.AspNet.SignalR.Transports
             _counters.ConnectionsCurrentWebSockets.Decrement();
         }
 
-        private Task AcceptWebSocketRequest(Func<IWebSocket, Task> callback)
+        private Task AcceptWebSocketRequest(ITransportConnection connection, Func<IWebSocket, Task> callback)
         {
             var accept = _context.Environment.Get<Action<IDictionary<string, object>, WebSocketFunc>>(OwinConstants.WebSocketAccept);
 
@@ -151,7 +150,7 @@ namespace Microsoft.AspNet.SignalR.Transports
                 socket.OnError = _error;
             };
 
-            var handler = new OwinWebSocketHandler(callback, prepareWebSocket, _maxIncomingMessageSize);
+            var handler = new OwinWebSocketHandler(connection, callback, prepareWebSocket, _maxIncomingMessageSize);
             accept(null, handler.ProcessRequest);
             return TaskAsyncHelper.Empty;
         }
@@ -214,6 +213,11 @@ namespace Microsoft.AspNet.SignalR.Transports
                 Transport = transport;
                 State = state;
             }
+        }
+        internal IWebSocket GetWebSocket()
+        {
+
+            return this._socket;
         }
     }
 }
