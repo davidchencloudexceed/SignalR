@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TB.Common.DataModel.User.TBUser" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>User\TBUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBBidAsk" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAJAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAA=</HashCode>
+      <FileName>Quote\Struct\TBBidAsk.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBCodeCategory" Collapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAABAA=</HashCode>
+      <FileName>Quote\Struct\TBCodeCategory.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBCodeID" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Quote\Struct\TBCodeId.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBDealList" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAQABAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Quote\Struct\TBDealList.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBKLine" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAACAACCIAABAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Quote\Struct\TBKLine.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBQueryEx" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAACAAAAABAAAABAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Quote\Struct\TBQueryEx.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBSpecDetail" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAASAAAAAAAAAAAAA=</HashCode>
+      <FileName>Quote\Struct\TBSpecDetail.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBSpecDetailValue" Collapsed="true">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAokLQMAARIAAQAAAgCMgAESBAAAAQAMAKIQAEA=</HashCode>
+      <FileName>Quote\Struct\TBSpecDetailValue.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBTickDeepLevel" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAABRhQAUAACAgCKICAAAAAQAIIIAIAAACAgA=</HashCode>
+      <FileName>Quote\Struct\TBTickDeepLevel.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBTimePair" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Quote\Struct\TBTimePair.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TB.Common.DataModel.Quote.Struct.TBTimeSale" Collapsed="true">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAQABAAAAAAAAAgAAAABAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Quote\Struct\TBTimeSale.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="TB.Common.DataModel.Quote.Enum.TBBigCategoryEnum" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAABCAAAAAAAAAAAAAAAAAAAAOAAAgAAA=</HashCode>
+      <FileName>Quote\Enum\TBBigCategoryEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TB.Common.DataModel.Quote.Enum.TBExchangePlaceEnum" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UQAAAAEAEAAMAAAAAkAWAAAAIAEAQAQAAAAQAAAIABE=</HashCode>
+      <FileName>Quote\Enum\TBExchangePlaceEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TB.Common.DataModel.Quote.Enum.TBMoneyMarkEnum" Collapsed="true">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAIAAICACAABAAAAAAAAAACCAAAAAAAAACAQ=</HashCode>
+      <FileName>Quote\Enum\TBMoneyMarkEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TB.Common.DataModel.Quote.Enum.TBTimeTypeEnum" Collapsed="true">
+    <Position X="5.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAIAAAAAAAAAAAAAAAAAABAhBAJAAAAQAAAAAA=</HashCode>
+      <FileName>Quote\Enum\TBTimeTypeEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

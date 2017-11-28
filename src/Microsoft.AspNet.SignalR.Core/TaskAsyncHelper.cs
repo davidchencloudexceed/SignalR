@@ -2,14 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 #if !SERVER
@@ -1022,7 +1017,7 @@ namespace Microsoft.AspNet.SignalR
 
         internal static void RunWithPreservedCulture<T>(CulturePair preservedCulture, Action<T> action, T arg)
         {
-            RunWithPreservedCulture(preservedCulture, (f, state)  =>
+            RunWithPreservedCulture(preservedCulture, (f, state) =>
             {
                 f(state);
                 return (object)null;

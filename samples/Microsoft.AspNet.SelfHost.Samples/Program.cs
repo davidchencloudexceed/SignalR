@@ -12,6 +12,7 @@ using Microsoft.Owin.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using TB.Common.DataModel.Quote.Struct;
 
 namespace Microsoft.AspNet.SelfHost.Samples
 {
@@ -30,6 +31,11 @@ namespace Microsoft.AspNet.SelfHost.Samples
                 _pool = GlobalHost.ConnectionManager.GetMemoryPool();
                 var options = new CmdLineOption();
                 var userInput = Console.ReadLine().Split(' ');
+                var tick = new TBTickDeepLevel();
+                tick.codeId = new TBCodeID { Code = "MSFT" };
+                tick.bidAsks = new List<TBBidAsk> { new TBBidAsk { ask = 100.01, askVol = 100 } };
+                tick.open = 100.01;
+                tick.openInt = 100.01;
 
                 var demoHub = GlobalHost.ConnectionManager.GetHubContext<DemoHub>();
                 //demoHub.Clients.Group("a").UpdatePrice(100);
@@ -41,7 +47,7 @@ namespace Microsoft.AspNet.SelfHost.Samples
                         hubConext.Groups.Add("fakeid", "MSFT");
                         var msftTopic = topicManager.GetOrAdd("hg-demo.MSFT", (name) => { return new Topic(32, TimeSpan.FromMinutes(10)); });
                         var stockGroup = hubConext.Clients.Group(options.stockSymbol);
-                        var hubOutgoingContext = (stockGroup as GroupProxy).GetHubOutgoingInvokerContext("UpdatePrice", options.stockSymbol, options.price);
+                        var hubOutgoingContext = (stockGroup as GroupProxy).GetHubOutgoingInvokerContext("UpdatePrice", tick);
                         var connMessage = new ConnectionMessage(hubOutgoingContext.Signal, hubOutgoingContext.Invocation, hubOutgoingContext.ExcludedSignals);
                         ArraySegment<byte> messageBuffer = GetMessageBuffer(connMessage.Value);
                         var message = new Message("fakeconnection", connMessage.Signal, options.price.ToString(), messageBuffer);

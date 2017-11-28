@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TB.Common.DataModel.Quote.Struct;
 
 namespace Microsoft.AspNet.SignalR.Client.Samples
 {
@@ -79,9 +80,9 @@ namespace Microsoft.AspNet.SignalR.Client.Samples
         {
 
             await hubProxy.Invoke("AddToGroup", "MSFT");
-            hubProxy.On<string, double>("UpdatePrice", (stockSymbol, stockPrice) =>
+            hubProxy.On<TBTickDeepLevel>("UpdatePrice", (tick) =>
             {
-                hubConnection.TraceWriter.WriteLine("get stock:{0} price:{1}", stockSymbol, stockPrice);
+                hubConnection.TraceWriter.WriteLine($"get tick code:{tick.codeId.Code} tick bid ask:{tick.bidAsks[0].ask} tick open::{tick.open}");
             });
 
 
