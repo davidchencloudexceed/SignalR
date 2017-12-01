@@ -26,7 +26,7 @@ namespace Microsoft.AspNet.SignalR.Utils
             var createDataCollection = new CounterCreationDataCollection(counterCreationData);
 
             PerformanceCounterCategory.Create(SignalRPerfCounterManager.CategoryName,
-                "SignalR application performance counters",
+                "Trade Blazer Quote Server performance counters",
                 PerformanceCounterCategoryType.MultiInstance,
                 createDataCollection);
 

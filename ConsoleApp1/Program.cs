@@ -7,8 +7,10 @@ namespace ConsoleApp1
 
     class Program
     {
+        
         static async Task AwaitAsync(int n)
         {
+            
             await Task.Delay(n);
             Console.WriteLine("start await async");
 

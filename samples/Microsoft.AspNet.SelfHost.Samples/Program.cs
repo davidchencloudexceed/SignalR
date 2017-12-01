@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using TB.Common.DataModel.Quote.Struct;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Microsoft.AspNet.SelfHost.Samples
 {
@@ -21,11 +23,33 @@ namespace Microsoft.AspNet.SelfHost.Samples
         static IMemoryPool _pool;
         static void Main(string[] args)
         {
+            var installer = new PerformanceCounterInstaller();
+            IList<string> counters;
+            counters = installer.InstallCounters();
+            var perfCounterManager = new CommonUtility.Infrastructure.PerformanceCounterManager();
+            perfCounterManager.Initialize("TB", CancellationToken.None);
+            var _processorCounter = new System.Diagnostics.PerformanceCounter("TBQuoteServer", perfCounterManager.MessagesReceivedFromReceiverPerSec.CounterName, "TB");
+            _processorCounter.BeginInit();
+            while (true)
+            {
+                perfCounterManager.MessagesReceivedFromReceiverTotal.Increment();
+                perfCounterManager.MessagesReceivedFromReceiverPerSec.Increment();
+                Console.WriteLine(perfCounterManager.MessagesReceivedFromReceiverTotal.NextSample().RawValue);
+                
+                Console.WriteLine(_processorCounter.NextValue());
+            }
+
+
+            
             using (WebApp.Start<Startup>("http://localhost:8080"))
             {
                 Console.WriteLine("Server running at http://localhost:8080/");
 
                 var hubConext = GlobalHost.ConnectionManager.GetHubContext<DemoHub>();
+                //foreach(var group in hubConext.Groups.)
+                //{
+                //    group.
+                //}
                 var topicManager = GlobalHost.ConnectionManager.GetTopicManager();
                 var messageBus = GlobalHost.ConnectionManager.GetMessageBus();
                 _pool = GlobalHost.ConnectionManager.GetMemoryPool();

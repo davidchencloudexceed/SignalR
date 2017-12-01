@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.AspNet.SelfHost.Samples</RootNamespace>
     <AssemblyName>Microsoft.AspNet.SelfHost.Samples</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="CmdLineOption.cs" />
     <Compile Include="Hubs\Chat.cs" />
+    <Compile Include="PerfCounterInstaller.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +99,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CommonUtility\CommonUtility.csproj">
+      <Project>{6f1e5191-684f-4d58-b6a4-ebce87ce8c92}</Project>
+      <Name>CommonUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Microsoft.AspNet.SignalR.Core\Microsoft.AspNet.SignalR.Core.csproj">
       <Project>{1b9a82c4-bca1-4834-a33e-226f17be070b}</Project>
       <Name>Microsoft.AspNet.SignalR.Core</Name>

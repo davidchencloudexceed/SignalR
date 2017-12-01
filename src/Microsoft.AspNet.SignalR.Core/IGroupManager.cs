@@ -25,5 +25,7 @@ namespace Microsoft.AspNet.SignalR
         /// <param name="groupName">The name of the group</param>
         /// <returns>A task that represents the connection id being removed from the group.</returns>
         Task Remove(string connectionId, string groupName);
+
+        
     }
 }
