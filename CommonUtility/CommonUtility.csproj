@@ -48,6 +48,9 @@
     <Compile Include="Infrastructure\PerformanceCounterManager.cs" />
     <Compile Include="Infrastructure\PerformanceCounterWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TBTask\DispatchingTaskCompletionSource.cs" />
+    <Compile Include="TBTask\TaskAsyncHelper.cs" />
+    <Compile Include="TBTask\TaskQueue.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
